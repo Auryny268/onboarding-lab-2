@@ -13,4 +13,14 @@ module Exercise2 (
     output logic [15:0] out
 );
 
+// wire xor1 = out[15] ^ out[13];
+// wire xor2 = out[12] ^ xor1;
+// wire xor3 = out[10] ^ xor2;
+
+always @(posedge clk)
+  if (!nReset)
+    out <= init;
+  else
+    out <= (out << 1) | (out[10] ^ (out[12] ^ (out[13] ^ out[15])));
+
 endmodule
